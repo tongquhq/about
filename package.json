@@ -1,0 +1,24 @@
+{
+  "name": "about-page-generator",
+  "version": "0.0.1",
+  "description": "About and Blog page generator for team and individual",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tongquhq/about.git"
+  },
+  "keywords": [
+    "generator",
+    "about",
+    "blog"
+  ],
+  "author": "at15@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tongquhq/about/issues"
+  },
+  "homepage": "https://github.com/tongquhq/about#readme"
+}

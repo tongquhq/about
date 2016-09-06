@@ -1,0 +1,14 @@
+# force lf for sh, go, yml
+*.sh text eol=lf
+.editorconfig eol=lf
+.gitignore eol=lf
+.gitattributes eol=lf
+*.yml eol=lf
+*.md eol=lf
+*.html eol=lf
+*.js eol=lf
+*.ts eol=lf
+*.css eol=lf
+*.json eol=lf
+*.yml eol=lf
+*.yaml eol=lf
