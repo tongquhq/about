@@ -1,0 +1,14 @@
+at15:
+  mail: at15@at15.com
+  github: at15
+  twitter: at1510086
+arrowrowe:
+  mail: mie@mie.com
+  github: arrowrowe
+  twitter: arrowrowe
+ComMouse:
+  mail: dou@dou.com
+  github: ComMouse
+# TODO: use json pointer ie: https://github.com/whitlockjc/json-refs
+sway:
+  - $ref: 'sway.yml'
