@@ -1,32 +1,23 @@
 #!/usr/bin/env node
+
 'use strict';
 const meow = require('meow');
-const chalk = require('chalk');
-const error = chalk.bold.red;
-console.log(error('Error!'));
+const configLocator = require('../lib/config/locator');
 
 const cli = meow(`
     Usage
-      $ foo <input>
+      $ about <input>
 
     Options
-      --rainbow, -r  Include a rainbow
+      --config, -c  Specify config file
 
     Examples
-      $ foo unicorns --rainbow
-      🌈 unicorns 🌈
+      $ about --config ./example/config.yaml
+      $ about -c ./example/config.yaml
 `, {
     alias: {
-        r: 'rainbow'
+        c: 'config'
     }
 });
-/*
- {
- input: ['unicorns'],
- flags: {rainbow: true},
- ...
- }
- */
-// node about.js unicorns --rainbow
-// unicorns { rainbow: true, r: true }
 console.log(cli.input[0], cli.flags);
+configLocator.detectConfigFile(cli.flags);
