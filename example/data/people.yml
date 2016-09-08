@@ -6,6 +6,8 @@ arrowrowe:
   mail: mie@mie.com
   github: arrowrowe
   twitter: arrowrowe
+  currentAddress:
+    $ref : address.yml/#/SJTU
 ComMouse:
   mail: dou@dou.com
   github: ComMouse
