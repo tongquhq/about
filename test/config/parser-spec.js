@@ -44,6 +44,7 @@ describe('Parser', () => {
         parser.addFile(entry);
         parser.resolveFile(entry);
         expect(parser.getResolved(entry).sway).to.eql(Parser.shallowParse('example/data/sway.yml'));
-    })
+    });
+    
 
 });
