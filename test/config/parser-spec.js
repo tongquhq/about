@@ -21,6 +21,10 @@ describe('Parser', () => {
         expect(Parser.isInnerRef('sway.yml')).to.eql(false);
     });
 
+    it('can check partial external reference syntax', ()=> {
+        expect(Parser.isExternalRefPartial('address.yml/#/SJTU')).to.eql(true);
+    });
+
     it('can add file', () => {
         let parser = new Parser();
         let file = 'example/data/people.yml';
@@ -45,6 +49,21 @@ describe('Parser', () => {
         parser.resolveFile(entry);
         expect(parser.getResolved(entry).sway).to.eql(Parser.shallowParse('example/data/sway.yml'));
     });
-    
+
+    it('can get file path from partial external ref', () => {
+        expect(Parser.getRefFilePath('sway.yml/#/address')).to.eql('sway.yml');
+    });
+
+    it('can get partial from partial external ref', () => {
+        expect(Parser.getRefPartial('sway.yml/#/address')).to.eql('address');
+    });
+
+    it('can resolve partial external ref', () => {
+        let parser = new Parser();
+        let entry = 'example/data/people.yml';
+        parser.addFile(entry);
+        parser.resolveFile(entry);
+        expect(parser.getResolved(entry).arrowrowe.currentAddress).to.eql({zipCode: 200240});
+    })
 
 });
