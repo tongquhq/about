@@ -1,8 +1,9 @@
 {
-  "name": "about-page-generator",
+  "name": "about-cli",
   "version": "0.0.1",
   "description": "About and Blog page generator for team and individual",
   "main": "index.js",
+  "bin": "./bin/about",
   "scripts": {
     "lint": "eslint .",
     "ft": "mocha test/**/*-spec.js",
