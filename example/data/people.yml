@@ -11,4 +11,4 @@ ComMouse:
   github: ComMouse
 # TODO: use json pointer ie: https://github.com/whitlockjc/json-refs
 sway:
-  - $ref: 'sway.yml'
+  $ref: 'sway.yml'

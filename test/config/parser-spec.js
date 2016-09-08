@@ -3,6 +3,7 @@
  */
 'use strict';
 const expect = require('chai').expect;
+const fsUtil = require('../../lib/util/fs');
 const Parser = require('../../lib/config/parser');
 
 describe('Parser', () => {
@@ -15,11 +16,16 @@ describe('Parser', () => {
         });
     });
 
+    it('can check inner reference syntax', ()=> {
+        expect(Parser.isInnerRef('#/people/sway')).to.eql(true);
+        expect(Parser.isInnerRef('sway.yml')).to.eql(false);
+    });
+
     it('can add file', () => {
         let parser = new Parser();
         let file = 'example/data/people.yml';
         parser.addFile(file);
-        expect(parser.parsed).to.have.ownProperty(file);
+        expect(parser.parsed).to.have.ownProperty(fsUtil.fullPath(file));
     });
 
     it('can add several files', () => {
@@ -28,7 +34,16 @@ describe('Parser', () => {
         let file2 = 'example/data/sway.yml';
         parser.addFile(file1);
         parser.addFile((file2));
-        expect(parser.parsed).to.have.all.keys(file1, file2);
+        expect(parser.parsed).to.have.all.keys(fsUtil.fullPath(file1), fsUtil.fullPath(file2));
     });
+
+    // FIXME: relative file path is not handled
+    it('can resolve external file', () => {
+        let parser = new Parser();
+        let entry = 'example/data/people.yml';
+        parser.addFile(entry);
+        parser.resolveFile(entry);
+        expect(parser.getResolved(entry).sway).to.eql(Parser.shallowParse('example/data/sway.yml'));
+    })
 
 });
