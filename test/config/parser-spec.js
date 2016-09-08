@@ -63,7 +63,7 @@ describe('Parser', () => {
         let entry = 'example/data/people.yml';
         parser.addFile(entry);
         parser.resolveFile(entry);
-        expect(parser.getResolved(entry).arrowrowe.currentAddress).to.eql({zipCode: 200240});
+        expect(parser.getResolved(entry).arrowrowe.currentAddress).to.eql(Parser.shallowParse('example/data/address.yml').SJTU);
     })
 
 });
