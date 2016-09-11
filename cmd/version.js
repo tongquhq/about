@@ -8,6 +8,7 @@ const version = require('../lib/constant').VERSION;
 
 let versionCmd = new Command();
 versionCmd.name = 'version';
+versionCmd.description = 'show current version';
 versionCmd.setFunc(() => {
     console.log(version);
 });

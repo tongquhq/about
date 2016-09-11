@@ -66,4 +66,22 @@ describe('Command', ()=> {
         });
         rootCmd.execute(null, ['git', 'clone', cloneURL], {verbose: true});
     });
+
+    it('help function is called when --help', (done) => {
+        let rootCmd = new Command();
+        rootCmd.name = 'dummy';
+        rootCmd.showHelp = () => {
+            done();
+        };
+        rootCmd.execute(null, [], {help: true});
+    });
+
+    it('help function is called when -h', (done) => {
+        let rootCmd = new Command();
+        rootCmd.name = 'dummy';
+        rootCmd.showHelp = () => {
+            done();
+        };
+        rootCmd.execute(null, [], {h: true});
+    });
 });
