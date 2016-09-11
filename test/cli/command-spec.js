@@ -33,4 +33,19 @@ describe('Command', ()=> {
         });
         cmd.execute(null, [], {});
     });
+
+    it('can execute sub command', (done) => {
+        let rootCmd = new Command();
+        rootCmd.name = 'dummy';
+        let gitCmd = new Command();
+        gitCmd.name = 'git';
+        gitCmd.setFunc((app, args, flags)=> {
+            expect(app).to.eql(null);
+            expect(args).to.eql(['status']);
+            expect(flags).to.eql({verbose: true});
+            done();
+        });
+        rootCmd.registerCommand(gitCmd);
+        rootCmd.execute(null, ['git', 'status'], {verbose: true});
+    });
 });
