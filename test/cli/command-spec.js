@@ -19,7 +19,6 @@ describe('Command', ()=> {
         expect(rootCmd.subCommands).to.have.property(subCmd.name);
         let subCmdWithoutName = new Command();
         expect(rootCmd.registerCommand(subCmdWithoutName)).to.eqls(false);
-
     });
 
     it('can execute callback function', (done) => {
@@ -47,5 +46,24 @@ describe('Command', ()=> {
         });
         rootCmd.registerCommand(gitCmd);
         rootCmd.execute(null, ['git', 'status'], {verbose: true});
+    });
+
+    it('non root cmd can have sub command', (done) => {
+        let rootCmd = new Command();
+        rootCmd.name = 'dummy';
+        let gitCmd = new Command();
+        gitCmd.name = 'git';
+        let cloneCmd = new Command();
+        cloneCmd.name = 'clone';
+        let cloneURL = 'git@github.com/tongquhq/about.git';
+        gitCmd.registerCommand(cloneCmd);
+        rootCmd.registerCommand(gitCmd);
+        cloneCmd.setFunc((app, args, flags) => {
+            expect(app).to.eql(null);
+            expect(args).to.eql([cloneURL]);
+            expect(flags).to.eql({verbose: true});
+            done();
+        });
+        rootCmd.execute(null, ['git', 'clone', cloneURL], {verbose: true});
     });
 });

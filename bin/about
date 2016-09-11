@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
 'use strict';
-const cli = require('../lib/cli');
-cli.run();
+// const cli = require('../lib/cli');
+// cli.run();
+
+const Cli = require('../lib/cli/app');
+const rootCmd = require('../cmd/root');
+
+let app = new Cli();
+app.setRootCmd(rootCmd);
+app.run();
