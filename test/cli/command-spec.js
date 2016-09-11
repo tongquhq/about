@@ -21,4 +21,16 @@ describe('Command', ()=> {
         expect(rootCmd.registerCommand(subCmdWithoutName)).to.eqls(false);
 
     });
+
+    it('can execute callback function', (done) => {
+        let cmd = new Command();
+        cmd.name = 'test';
+        cmd.setFunc((app, args, flags) => {
+            expect(app).to.eql(null);
+            expect(args).to.eql([]);
+            expect(flags).to.eql({});
+            done();
+        });
+        cmd.execute(null, [], {});
+    });
 });
