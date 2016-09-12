@@ -92,16 +92,28 @@ describe('Command', ()=> {
         let verboseFlag = new Flag('verbose', 'verbose logging', false);
         verboseFlag.alias = 'v';
         verboseFlag.global = true;
+        verboseFlag.defaultValue = false;
         rootCmd.addFlag(verboseFlag);
         expect(rootCmd.supportedFlags).to.not.have.property('verbose');
         expect(rootCmd.supportedGlobalFlags).to.have.property('verbose');
         expect(rootCmd.flagAlias).to.eql({verbose: 'v'});
         expect(rootCmd.flagAliasReverse).to.eql({v: 'verbose'});
 
+        // alias
         let flags = rootCmd.populateFlags({verbose: true});
         expect(flags).to.eql({verbose: true, v: true});
         flags = rootCmd.populateFlags({v: true});
         expect(flags).to.eql({verbose: true, v: true});
+        // default
+        expect(flags.vv).to.be.undefined;
+        expect(flags.verbose).to.be.true;
+        let configFlag = new Flag('config', 'config file location', '$HOME/.about.yml');
+        rootCmd.addFlag(configFlag);
+        flags = rootCmd.populateFlags({});
+        expect(flags.verbose).to.be.false;
+        // alias is also populated
+        expect(flags.v).to.be.false;
+        expect(flags.config).to.eql(configFlag.defaultValue);
 
     });
 });
