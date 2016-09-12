@@ -18,6 +18,7 @@ describe('Template', ()=> {
             });
     });
 
+    // TODO: use sinon to test render by file
     it('can render file', (done) => {
         render.renderByFile('example/tmpl/index.html', {title: 'abc'})
             .then((out)=> {
@@ -29,5 +30,13 @@ describe('Template', ()=> {
             });
     });
 
-    // TODO: use sinon to test render by file
+    it('reject non exist file', (done) => {
+        render.renderByFile('example/tmpl/1234.html', {title: 'abc'})
+            .then(()=> {
+            }, (e)=> {
+                expect(e.message).to.contain('not found');
+                done();
+            });
+    });
+
 });
