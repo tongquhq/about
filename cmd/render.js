@@ -4,6 +4,7 @@
 'use strict';
 
 const Command = require('../lib/cli/command');
+const Flag = require('../lib/cli/flag');
 const logger = require('../lib/logger');
 const render = require('../lib/template/render');
 
@@ -19,10 +20,20 @@ renderCmd.setFunc((app, args, flags) => {
     }
     logger.info('try to render file', {file: args[0]});
     render.renderByFile(args[0], {title: 'abc'}).then((out)=> {
-        logger.info(out);
+        if (args.length === 1 || flags.o) {
+            logger.info(out);
+        }
+        if (args.length == 2) {
+            logger.warn('TODO: write output to file', {file: args[1]});
+        }
     }).catch((e)=> {
         logger.error(e);
     });
 });
+
+// add flags
+let outputFlag = new Flag('output', 'output content to console even if destination file is specified', false);
+outputFlag.setAlias('o');
+renderCmd.addFlag(outputFlag);
 
 module.exports = renderCmd;
