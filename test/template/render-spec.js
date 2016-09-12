@@ -17,4 +17,6 @@ describe('Template', ()=> {
                 done(e);
             });
     });
+
+    // TODO: use sinon to test render by file
 });
