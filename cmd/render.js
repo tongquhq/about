@@ -35,15 +35,25 @@ renderCmd.setFunc((app, args, flags) => {
     //         console.error(e);
     //     });
 
-    console.log('lalalal');
+    // console.log('lalalal');
+    // NOTE: this is working when run the command alone
+    // render.renderBySource('I am {title}', {title: 'abc'})
+    //     .then((out)=> {
+    //         console.log(out);
+    //     },(e)=>{
+    //         console.log(e);
+    //     })
 
-    render.renderByName('I am {title}', {title: 'abc'})
+    render.renderByFile('../example/tmpl/index.html', {title: 'abc'})
         .then((out)=> {
-            alert('wtf');
-            console.log(out);
-        },(e)=>{
-            console.log(e);
+            console.log('I got out!', out);
         })
+        .catch((e)=> {
+            console.error(e);
+        });
+
 });
 
-module.exports = renderCmd;
+// module.exports = renderCmd;
+
+renderCmd.executeCurrent(null,[],{});
