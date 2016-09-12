@@ -6,6 +6,7 @@
 const Command = require('../lib/cli/command');
 const Flag = require('../lib/cli/flag');
 const versionCmd = require('./version');
+const renderCmd = require('./render');
 
 let rootCmd = new Command();
 rootCmd.name = 'about-cli';
@@ -25,5 +26,6 @@ rootCmd.addFlag(verboseFlag);
 
 // register commands
 rootCmd.registerCommand(versionCmd);
+rootCmd.registerCommand(renderCmd);
 
 module.exports = rootCmd;
