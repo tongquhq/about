@@ -5,6 +5,7 @@
 
 const expect = require('chai').expect;
 const Command = require('../../lib/cli/command');
+const Flag = require('../../lib/cli/flag');
 
 describe('Command', ()=> {
     it('can register command', () => {
@@ -83,5 +84,24 @@ describe('Command', ()=> {
             done();
         };
         rootCmd.execute(null, [], {h: true});
+    });
+
+    it('can populate flag alias', ()=> {
+        let rootCmd = new Command();
+        rootCmd.name = 'dummy';
+        let verboseFlag = new Flag('verbose', 'verbose logging', false);
+        verboseFlag.alias = 'v';
+        verboseFlag.global = true;
+        rootCmd.addFlag(verboseFlag);
+        expect(rootCmd.supportedFlags).to.not.have.property('verbose');
+        expect(rootCmd.supportedGlobalFlags).to.have.property('verbose');
+        expect(rootCmd.flagAlias).to.eql({verbose: 'v'});
+        expect(rootCmd.flagAliasReverse).to.eql({v: 'verbose'});
+
+        let flags = rootCmd.populateFlags({verbose: true});
+        expect(flags).to.eql({verbose: true, v: true});
+        flags = rootCmd.populateFlags({v: true});
+        expect(flags).to.eql({verbose: true, v: true});
+
     });
 });
