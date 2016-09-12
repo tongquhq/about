@@ -44,7 +44,9 @@ renderCmd.setFunc((app, args, flags) => {
     //         console.log(e);
     //     })
 
-    render.renderByFile('../example/tmpl/index.html', {title: 'abc'})
+    console.log('oh yeah');
+
+    render.renderByFile('example/tmpl/index.html', {title: 'abc'})
         .then((out)=> {
             console.log('I got out!', out);
         })
@@ -52,8 +54,10 @@ renderCmd.setFunc((app, args, flags) => {
             console.error(e);
         });
 
+    console.log('oh ha');
+    setTimeout(()=>{
+        console.log('what?');
+    },200);
 });
 
-// module.exports = renderCmd;
-
-renderCmd.executeCurrent(null,[],{});
+module.exports = renderCmd;
