@@ -18,5 +18,16 @@ describe('Template', ()=> {
             });
     });
 
+    it('can render file', (done) => {
+        render.renderByFile('example/tmpl/index.html', {title: 'abc'})
+            .then((out)=> {
+                console.log('I got out!', out);
+                done();
+            })
+            .catch((e)=> {
+                done(e);
+            });
+    });
+
     // TODO: use sinon to test render by file
 });

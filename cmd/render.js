@@ -21,7 +21,7 @@ renderCmd.setFunc((app, args, flags) => {
     // FIXME: the then and catch are not triggered
     render.renderByFile(args[0], {title: 'abc'}).then((out)=> {
         console.log('resolved!');
-        console.log(out);
+        logger.info(out);
     }).catch((e)=> {
         logger.error(e);
     });
